@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 import Orphanage from "../models/Orphanage";
 import orphanageView from "../views/orphanages_view";
@@ -56,7 +56,7 @@ export default {
       about,
       instructions,
       opening_hours,
-      open_on_weekends,
+      open_on_weekends: open_on_weekends === "true",
       images,
     };
 
@@ -70,26 +70,17 @@ export default {
       open_on_weekends: Yup.boolean().required(),
       images: Yup.array(
         Yup.object().shape({
-          path: Yup.string().required()
+          path: Yup.string().required(),
         })
       ),
-    })
+    });
 
     await schema.validate(data, {
       abortEarly: false, // shows all errors at the same time
-    })
+    });
 
     // only create repository
-    const orphanage = orphanagesRepository.create({
-      name,
-      latitude,
-      longitude,
-      about,
-      instructions,
-      opening_hours,
-      open_on_weekends,
-      images,
-    });
+    const orphanage = orphanagesRepository.create(data);
 
     // send the repository created
     await orphanagesRepository.save(orphanage);
