@@ -25,3 +25,10 @@
   - to view database: Beekeeper Studio app
 - yup (data validation)
 - cors (allow access from different domains)
+
+
+### to do
+- criar botao de excluir as fotos no CreateOrphanages (ver figma)
+- implementar o shimmer effect - https://blog.rocketseat.com.br/react-native-shimmer/
+- add whatsapp support
+- desafios https://github.com/rocketseat-education/nlw-03-omnistack
